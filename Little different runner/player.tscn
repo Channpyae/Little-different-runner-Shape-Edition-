@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkgdc2mjxynwx"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_umouo"]
+[ext_resource type="Texture2D" uid="uid://4hva5u7rs53c" path="res://icon.svg" id="2_jh4ie"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_crmka"]
+albedo_texture = ExtResource("2_jh4ie")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vv3we"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m6gff"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_umouo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_crmka")
+mesh = SubResource("CapsuleMesh_vv3we")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_m6gff")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.922073, 0.387016, 0, -0.387016, 0.922073, 0, 3.72429, 5.03842)
+fov = 87.0

@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx6t1c6rdva2q"]
+
+[ext_resource type="PackedScene" uid="uid://bkgdc2mjxynwx" path="res://player.tscn" id="1_miv0i"]
+[ext_resource type="PackedScene" uid="uid://brsf1inf2wqga" path="res://blue_ball.tscn" id="2_sfwtj"]
+[ext_resource type="PackedScene" uid="uid://c0x0q5isgifu1" path="res://die_rectangle_2_length.tscn" id="3_gr6iu"]
+[ext_resource type="PackedScene" uid="uid://6qop3w0dvrjt" path="res://die_rectangle_4_lenght.tscn" id="4_do58s"]
+[ext_resource type="PackedScene" uid="uid://sgb8j6ffpe6u" path="res://green_cube.tscn" id="5_gwhwf"]
+[ext_resource type="PackedScene" uid="uid://gpee5nqm571u" path="res://die_rectangle_1_length.tscn" id="6_wy7vy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_aqstb"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_77kjn"]
+sky_material = SubResource("ProceduralSkyMaterial_aqstb")
+
+[sub_resource type="Environment" id="Environment_ips8t"]
+background_mode = 2
+sky = SubResource("Sky_77kjn")
+tonemap_mode = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_cr05f"]
+size = Vector2(6, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qcs0r"]
+size = Vector3(6, 0.1, 30)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ips8t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.795018, 0.215719, -0.566931, 0, 0.934627, 0.355629, 0.606585, 0.282732, -0.743046, 0, 0, 0)
+shadow_enabled = true
+
+[node name="player" parent="." instance=ExtResource("1_miv0i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63633, 0)
+
+[node name="map_1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.7214)
+mesh = SubResource("PlaneMesh_cr05f")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="map_1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="map_1/StaticBody3D"]
+shape = SubResource("BoxShape3D_qcs0r")
+
+[node name="blue_ball" parent="map_1/StaticBody3D" instance=ExtResource("2_sfwtj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19654, 0.648811, 2.57794)
+
+[node name="blue_ball2" parent="map_1/StaticBody3D" instance=ExtResource("2_sfwtj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56025, 2.72474, -1.54601)
+
+[node name="die_rectangle_4length" parent="map_1/StaticBody3D" instance=ExtResource("4_do58s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.818127, 0.356181, -8.04983)
+
+[node name="green_cube" parent="map_1/StaticBody3D" instance=ExtResource("5_gwhwf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46722, 0.687102, -11.5235)
+
+[node name="die_rectangle_1_length" parent="map_1/StaticBody3D" instance=ExtResource("6_wy7vy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.381073, 0.425922, -13.631)
+
+[node name="die_rectangle_2length" parent="map_1/StaticBody3D" instance=ExtResource("3_gr6iu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66732, 0.726938, -1.17553)
